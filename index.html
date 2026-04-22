@@ -225,6 +225,176 @@ p.lede {
 }
 .divider span.glow { background: var(--glow); }
 
+/* ── Header actions (SNS + lang) ────────────────────────────────── */
+.header-actions { display: inline-flex; align-items: center; gap: 12px; }
+.sns-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    border: 1px solid var(--dim);
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    transition: border-color .15s, color .15s, background .15s;
+}
+.sns-link:hover {
+    border-color: var(--glow);
+    color: var(--glow);
+    background: rgba(255,255,255,0.04);
+}
+
+/* ── LOG decor catalog previews (seasonal / time / milestone) ────── */
+.weekday-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 24px;
+}
+@media (max-width: 520px) { .weekday-row { grid-template-columns: repeat(4, 1fr); } }
+.weekday-chip {
+    border: 1px solid var(--dim);
+    padding: 10px 4px;
+    text-align: center;
+    background: var(--ink2);
+}
+.weekday-chip img {
+    width: 100%;
+    max-width: 56px;
+    aspect-ratio: 1;
+    image-rendering: pixelated;
+    display: block;
+    margin: 0 auto 6px;
+}
+.weekday-chip .d { font-size: 9px; letter-spacing: 1.5px; color: var(--sub); }
+.weekday-chip .j { font-size: 10px; color: var(--text); margin-top: 2px; }
+
+.decor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+}
+@media (min-width: 640px) { .decor-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .decor-grid { grid-template-columns: repeat(4, 1fr); } }
+.decor-card {
+    border: 1px solid var(--dim);
+    padding: 10px;
+    background: var(--ink2);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.decor-preview {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--ink);
+    position: relative;
+    overflow: hidden;
+    border: 1px dashed rgba(56,70,88,0.35);
+}
+.decor-base {
+    position: absolute;
+    left: 50%; bottom: 12%;
+    width: 42%;
+    transform: translateX(-50%);
+    image-rendering: pixelated;
+    z-index: 3;
+    opacity: 0.94;
+}
+.decor-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+}
+.decor-label .ttl { color: var(--glow); font-weight: 700; }
+.decor-label .trg { color: var(--sub); font-size: 9px; letter-spacing: 1px; }
+.decor-desc { color: var(--sub); font-size: 10.5px; line-height: 1.55; }
+
+/* ── Particle animations (ld-* prefix) ───────────────────────────── */
+.ld-sakura { position: absolute; width: 3px; height: 3px; background: #E89FB0; top: -6px; animation: ld-sakura-fall linear infinite; }
+@keyframes ld-sakura-fall {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 1; }
+    25% { transform: translate(10px, 30px); }
+    50% { transform: translate(-4px, 60px); }
+    75% { transform: translate(12px, 90px); }
+    100% { transform: translate(0, 130px); opacity: 0; }
+}
+.ld-rain { position: absolute; width: 1px; height: 7px; background: #7a9cb8; top: -10px; animation: ld-rain-fall linear infinite; }
+@keyframes ld-rain-fall {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 0.7; }
+    100% { transform: translateY(140px); opacity: 0; }
+}
+.ld-firefly { position: absolute; width: 3px; height: 3px; background: #EFC94C; box-shadow: 0 0 8px #EFC94C, 0 0 2px #fff; animation: ld-firefly ease-in-out infinite; }
+@keyframes ld-firefly {
+    0%, 100% { opacity: 0; transform: scale(0.4); }
+    50%      { opacity: 1; transform: scale(1); }
+}
+.ld-maple { position: absolute; width: 4px; height: 4px; top: -6px; animation: ld-maple-fall linear infinite; }
+.ld-maple.red   { background: #C63027; }
+.ld-maple.amber { background: #E07B2E; }
+.ld-maple.gold  { background: #C89030; }
+@keyframes ld-maple-fall {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 1; }
+    30% { transform: translate(14px, 40px); }
+    60% { transform: translate(-10px, 80px); }
+    100% { transform: translate(6px, 140px); opacity: 0; }
+}
+.ld-snow { position: absolute; width: 3px; height: 3px; background: #fff; top: -6px; animation: ld-snow-fall linear infinite; }
+@keyframes ld-snow-fall {
+    0% { transform: translate(0, 0); opacity: 0; }
+    10% { opacity: 0.95; }
+    100% { transform: translate(8px, 140px); opacity: 0; }
+}
+.ld-sunrise { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 85%, rgba(239,150,80,0.55) 0%, rgba(225,52,55,0.25) 35%, transparent 70%); animation: ld-sunrise-pulse 4s ease-in-out infinite; }
+@keyframes ld-sunrise-pulse { 0%,100% { opacity: 0.6; } 50% { opacity: 1; } }
+.ld-dawn { position: absolute; inset: 0; background: linear-gradient(to top, transparent 20%, rgba(239,201,76,0.12) 60%, rgba(225,100,70,0.08) 100%); }
+.ld-night-bg { position: absolute; inset: 0; background: linear-gradient(to top, transparent 30%, rgba(0,0,0,0.45) 100%); }
+.ld-star { position: absolute; width: 2px; height: 2px; background: #fff; animation: ld-twinkle ease-in-out infinite; }
+@keyframes ld-twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 1; } }
+.ld-moon { position: absolute; top: 8px; right: 10px; width: 9px; height: 9px; background: #f4e7b0; border-radius: 50%; box-shadow: 0 0 10px rgba(244,231,176,0.45); }
+.ld-spark {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #fff;
+    left: 50%; bottom: 26px;
+    animation: ld-sparkle ease-out infinite;
+}
+@keyframes ld-sparkle {
+    0%   { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% + var(--dy, 0px))) scale(0); opacity: 0; }
+}
+.ld-streak-glow {
+    position: absolute;
+    left: 50%; bottom: 0;
+    width: 70px; height: 70px;
+    transform: translate(-50%, 18%);
+    background: radial-gradient(circle, rgba(255,215,120,0.4), transparent 60%);
+    animation: ld-streak-pulse 2.4s ease-in-out infinite;
+}
+@keyframes ld-streak-pulse {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, 18%) scale(0.9); }
+    50%      { opacity: 1;   transform: translate(-50%, 18%) scale(1.08); }
+}
+.ld-confetti { position: absolute; width: 3px; height: 3px; top: -6px; animation: ld-confetti-fall linear infinite; }
+.ld-confetti.c1 { background: #E13437; }
+.ld-confetti.c2 { background: #EFC94C; }
+.ld-confetti.c3 { background: #E89FB0; }
+.ld-confetti.c4 { background: #3f8a4b; }
+.ld-confetti.c5 { background: #ffffff; }
+@keyframes ld-confetti-fall {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translate(var(--dx, 10px), 150px) rotate(720deg); opacity: 0; }
+}
+
 /* ── Feature cards ──────────────────────────────────────────────── */
 .features {
     display: grid;
@@ -503,10 +673,13 @@ footer.bottom a:hover { color: var(--glow); }
             </svg>
             <span>DDD</span>
         </a>
-        <nav class="lang-switch" aria-label="language">
-            <button class="active" data-lang="en" type="button">EN</button>
-            <button data-lang="ja" type="button">JA</button>
-        </nav>
+        <div class="header-actions">
+            <a class="sns-link" href="https://x.com/ddddotdotddd" target="_blank" rel="noopener" aria-label="@ddddotdotddd on X">𝕏</a>
+            <nav class="lang-switch" aria-label="language">
+                <button class="active" data-lang="en" type="button">EN</button>
+                <button data-lang="ja" type="button">JA</button>
+            </nav>
+        </div>
     </div>
 </header>
 
@@ -696,6 +869,138 @@ footer.bottom a:hover { color: var(--glow); }
                 <p class="en">Three in-tab loops: <code>bgm 1</code> ambient pad · <code>bgm 2</code> lo-fi beat · <code>bgm 3</code> rainfall. Rendered offline as WAV → plays through a real <code>&lt;audio&gt;</code> element so it <strong>keeps going when the screen locks</strong> on mobile.</p>
                 <p class="ja">3種のループ: <code>bgm 1</code> アンビエント・パッド / <code>bgm 2</code> ロウファイビート / <code>bgm 3</code> 雨音+ベル。オフライン合成→ <code>&lt;audio&gt;</code> 要素再生なので、モバイルで<strong>画面を消しても鳴り続ける</strong>。</p>
             </div>
+            <div class="card">
+                <svg class="icon" viewBox="0 0 8 8" shape-rendering="crispEdges"><rect x="3" y="0" width="2" height="4" fill="#fff"/><rect x="3" y="4" width="2" height="1" fill="#E13437"/><rect x="5" y="3" width="1" height="1" fill="#fff"/><rect x="2" y="3" width="1" height="1" fill="#fff"/><rect x="0" y="6" width="1" height="1" fill="#fff"/><rect x="3" y="6" width="2" height="1" fill="#fff"/><rect x="7" y="6" width="1" height="1" fill="#fff"/></svg>
+                <h3 class="en">TIMER audio cues</h3>
+                <h3 class="ja">TIMER 音声キュー</h3>
+                <p class="en">A soft 2-tone bell marks <strong>every 15 min</strong> so long sessions don't vanish into the void. The final <strong>10 seconds</strong> tick down with short square-wave pips — you feel zero approaching without looking.</p>
+                <p class="ja">15分経過ごとに優しい2音ベルが鳴り、長いセッションが意識から抜け落ちるのを防ぎます。最後の<strong>10秒</strong>は短い「ピッ」音のカウントダウン — 画面を見なくてもゼロが近づくのが分かります。</p>
+            </div>
+            <div class="card">
+                <svg class="icon" viewBox="0 0 8 8" shape-rendering="crispEdges"><rect x="3" y="1" width="2" height="1" fill="#fff"/><rect x="2" y="2" width="4" height="1" fill="#fff"/><rect x="1" y="3" width="6" height="1" fill="#fff"/><rect x="3" y="4" width="2" height="2" fill="#E13437"/><rect x="3" y="6" width="2" height="2" fill="#3f8a4b"/></svg>
+                <h3 class="en">Weekday pixel rotation</h3>
+                <h3 class="ja">曜日ピクセル循環</h3>
+                <p class="en">The small icon under LOG cycles through 7 pixel creatures — flower on MON, tulip TUE, sunflower WED, rose THU, then cat · bird · fish toward the weekend. A tiny calendar you feel rather than read.</p>
+                <p class="ja">LOG下部の小さなアイコンが7種を循環。月=花、火=チューリップ、水=向日葵、木=薔薇、そして週末に向け 猫・鳥・魚。読まずに感じる、ささやかな曜日感覚。</p>
+            </div>
+            <div class="card">
+                <svg class="icon" viewBox="0 0 8 8" shape-rendering="crispEdges"><rect x="1" y="0" width="1" height="1" fill="#E89FB0"/><rect x="4" y="1" width="1" height="1" fill="#fff"/><rect x="6" y="0" width="1" height="1" fill="#EFC94C"/><rect x="2" y="2" width="1" height="1" fill="#E89FB0"/><rect x="5" y="3" width="1" height="1" fill="#fff"/><rect x="0" y="4" width="1" height="1" fill="#EFC94C"/><rect x="7" y="4" width="1" height="1" fill="#fff"/><rect x="3" y="5" width="1" height="1" fill="#E89FB0"/><rect x="1" y="6" width="1" height="1" fill="#EFC94C"/><rect x="6" y="7" width="1" height="1" fill="#fff"/></svg>
+                <h3 class="en">Seasonal layers</h3>
+                <h3 class="ja">季節のレイヤー</h3>
+                <p class="en">Sakura drifts in spring. Rain lines in June. Fireflies on summer nights. Red & gold maples in fall. Snow in winter. A sunrise glow for Jan 1-3. Six quiet atmospheres, all pure CSS — no images.</p>
+                <p class="ja">春は桜、6月は雨、夏の夜は蛍、秋は紅葉、冬は雪、元日〜3日は初日の出の赤い光。6つの静かな空気、すべて純 CSS で画像は使いません。</p>
+            </div>
+            <div class="card">
+                <svg class="icon" viewBox="0 0 8 8" shape-rendering="crispEdges"><rect x="3" y="3" width="2" height="2" fill="#EFC94C"/><rect x="1" y="2" width="1" height="1" fill="#EFC94C"/><rect x="6" y="2" width="1" height="1" fill="#EFC94C"/><rect x="1" y="5" width="1" height="1" fill="#EFC94C"/><rect x="6" y="5" width="1" height="1" fill="#EFC94C"/><rect x="3" y="0" width="2" height="1" fill="#fff"/><rect x="3" y="7" width="2" height="1" fill="#fff"/><rect x="0" y="3" width="1" height="2" fill="#fff"/><rect x="7" y="3" width="1" height="2" fill="#fff"/></svg>
+                <h3 class="en">Streak milestones</h3>
+                <h3 class="ja">連続記録マイルストーン</h3>
+                <p class="en">At <strong>7 consecutive days</strong> small sparks scatter under the icon. At <strong>30</strong>, a warm glow joins them. Set your birthday with <code>birthday 12-25</code> and confetti rains that single day.</p>
+                <p class="ja"><strong>7日連続</strong>でアイコン下に小さな火花、<strong>30日</strong>で暖色のグローが加わります。<code>birthday 12-25</code> で誕生日を設定すれば、当日だけ紙吹雪が舞います。</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ LOG DECOR CATALOG ═════════════════════════════════════════ -->
+<section id="decor">
+    <div class="wrap">
+        <div class="eyebrow"><span class="dash"></span> LOG DECOR / 季節装飾</div>
+        <h2 class="en">Time makes the pixels change.</h2>
+        <h2 class="ja">時が経つと、ピクセルは変わる。</h2>
+        <p class="lede en" style="margin-top:18px;">
+            The tiny icon at the bottom of LOG is layered. A weekday base · a seasonal particle layer · a time-of-day mood · a milestone reward. All pure CSS — roughly 20 DOM nodes per layer. Open the app on different days and you'll meet different quiet weathers.
+        </p>
+        <p class="lede ja" style="margin-top:18px;">
+            LOG下部の小さなアイコンはレイヤー構造。曜日ベース × 季節の粒子 × 時刻のムード × 連続記録のご褒美。すべて純 CSS、各レイヤーわずか20ノード程度。日を変えてアプリを開くたびに、違う静かな天気に出会います。
+        </p>
+
+        <!-- A. Weekday icon row -->
+        <div class="eyebrow" style="margin-top:40px;"><span class="dash"></span> A. WEEKDAY BASE / 曜日のベース</div>
+        <div class="weekday-row">
+            <div class="weekday-chip"><img src="flower.svg" alt="flower"><div class="d">MON</div><div class="j">月</div></div>
+            <div class="weekday-chip"><img src="tulip.svg" alt="tulip"><div class="d">TUE</div><div class="j">火</div></div>
+            <div class="weekday-chip"><img src="sunflower.svg" alt="sunflower"><div class="d">WED</div><div class="j">水</div></div>
+            <div class="weekday-chip"><img src="rose.svg" alt="rose"><div class="d">THU</div><div class="j">木</div></div>
+            <div class="weekday-chip"><img src="cat.svg" alt="cat"><div class="d">FRI</div><div class="j">金</div></div>
+            <div class="weekday-chip"><img src="bird.svg" alt="bird"><div class="d">SAT</div><div class="j">土</div></div>
+            <div class="weekday-chip"><img src="fish.svg" alt="fish"><div class="d">SUN</div><div class="j">日</div></div>
+        </div>
+
+        <!-- B. Seasonal -->
+        <div class="eyebrow" style="margin-top:48px;"><span class="dash"></span> B. SEASONAL / 季節の演出</div>
+        <div class="decor-grid">
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-sakura"><img class="decor-base" src="tulip.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">SAKURA</span><span class="trg">03-04月</span></div>
+                <div class="decor-desc"><span class="en">Pink petals drift diagonally — the soft chaos of spring.</span><span class="ja">桜の花びらが斜めに舞い落ちる。春の標準演出。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-rain"><img class="decor-base" src="flower.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">RAIN</span><span class="trg">06月</span></div>
+                <div class="decor-desc"><span class="en">Thin vertical lines. The rainy season, silent.</span><span class="ja">梅雨の細い雨が垂直に降る。音は無し。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-firefly"><img class="decor-base" src="sunflower.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">FIREFLY</span><span class="trg">07-08月 夜</span></div>
+                <div class="decor-desc"><span class="en">Fireflies blink softly. Summer nights only.</span><span class="ja">蛍が柔らかく明滅。夏の夜のみ発動。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-maple"><img class="decor-base" src="rose.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">MAPLE</span><span class="trg">10-11月</span></div>
+                <div class="decor-desc"><span class="en">Red, amber, gold leaves sway down.</span><span class="ja">紅葉（赤・橙・金）が揺れながら舞い落ちる。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-snow"><img class="decor-base" src="bird.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">SNOW</span><span class="trg">12-02月</span></div>
+                <div class="decor-desc"><span class="en">White pixels drift on a slow diagonal.</span><span class="ja">白いピクセルがゆっくり斜めに降る。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-sunrise"><div class="ld-sunrise"></div><img class="decor-base" src="sunflower.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">SUNRISE</span><span class="trg">01/01-03</span></div>
+                <div class="decor-desc"><span class="en">Red dawn glow for the first three days of the year.</span><span class="ja">初日の出の赤い光がゆっくり脈打つ。正月3日間限定。</span></div>
+            </div>
+        </div>
+
+        <!-- C. Time of day -->
+        <div class="eyebrow" style="margin-top:48px;"><span class="dash"></span> C. TIME OF DAY / 時刻</div>
+        <div class="decor-grid">
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-dawn"><div class="ld-dawn"></div><img class="decor-base" src="flower.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">DAWN</span><span class="trg">05-08時</span></div>
+                <div class="decor-desc"><span class="en">Warm gradient from the top — early-morning quiet.</span><span class="ja">暖色のグラデが上から薄くかかる。朝の静けさ。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-night"><div class="ld-night-bg"></div><div class="ld-moon"></div><img class="decor-base" src="cat.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">NIGHT</span><span class="trg">22-05時</span></div>
+                <div class="decor-desc"><span class="en">Dim sky overlay with moon + twinkling stars.</span><span class="ja">上空が暗くなり、月と星がまたたく。</span></div>
+            </div>
+        </div>
+
+        <!-- D. Milestones -->
+        <div class="eyebrow" style="margin-top:48px;"><span class="dash"></span> D. MILESTONES / 記念日</div>
+        <div class="decor-grid">
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-streak7"><img class="decor-base" src="fish.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">STREAK 7</span><span class="trg">7日連続</span></div>
+                <div class="decor-desc"><span class="en">Small radial sparks. A week of showing up.</span><span class="ja">小さな火花が控えめに散る。週の継続を祝う。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-streak30"><div class="ld-streak-glow"></div><img class="decor-base" src="rose.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">STREAK 30</span><span class="trg">30日連続</span></div>
+                <div class="decor-desc"><span class="en">A warm glow pulses; larger sparks drift outward.</span><span class="ja">暖色グローが脈打ち、大きめの火花が外側へ。</span></div>
+            </div>
+            <div class="decor-card">
+                <div class="decor-preview" id="dg-birthday"><img class="decor-base" src="flower.svg" alt=""></div>
+                <div class="decor-label"><span class="ttl">BIRTHDAY</span><span class="trg">誕生日</span></div>
+                <div class="decor-desc"><span class="en">5-color confetti spirals down. One day only.</span><span class="ja">5色の紙吹雪が螺旋を描いて落ちる。当日のみ。</span></div>
+            </div>
+        </div>
+
+        <div class="btn-row" style="margin-top:36px;">
+            <a class="btn" href="./animations.html">
+                <span class="en">FULL CATALOG →</span>
+                <span class="ja">フルカタログ →</span>
+            </a>
         </div>
     </div>
 </section>
@@ -715,6 +1020,7 @@ footer.bottom a:hover { color: var(--glow); }
             <div class="term-line"><span style="width:18px;"></span><span class="out">dur &lt;min&gt;              15 / 25 / 45 / 60</span></div>
             <div class="term-line"><span style="width:18px;"></span><span class="out">stats                  today + history</span></div>
             <div class="term-line"><span style="width:18px;"></span><span class="out">bgm 1 / 2 / 3          pad · lo-fi beat · rainfall (on/off)</span></div>
+            <div class="term-line"><span style="width:18px;"></span><span class="out">birthday MM-DD         confetti on that day</span></div>
             <div class="term-line"><span class="p">&gt;</span><span class="cmd">task 1 Read book</span></div>
             <div class="term-line"><span style="width:18px;"></span><span class="out" style="color:var(--glow);">TASK 1 = "Read book"</span></div>
             <div class="term-line"><span class="p">&gt;</span><span class="cmd">dur 25</span></div>
@@ -799,6 +1105,34 @@ footer.bottom a:hover { color: var(--glow); }
                 <p class="en">It's the "in progress" marker — visual confirmation that this is the task the TIMER will operate on. Only the first unchecked task shows it; all others show either a lock (future) or a check mark (done).</p>
                 <p class="ja">「実行中」マーカーです — タイマーがこのタスクを対象にしていることの目印。最初の未完了タスクにだけ点き、それ以外は鍵（未来）かチェック（完了）のいずれかが表示されます。</p>
             </details>
+
+            <details>
+                <summary class="en">What exactly does the TIMER play in audio?</summary>
+                <summary class="ja">TIMER からはどんな音が鳴る？</summary>
+                <p class="en">Two things. (1) A <strong>soft 2-tone bell</strong> marks every 15-minute milestone — 15, 30, 45 — so a 60-minute session has three checkpoints. (2) The final <strong>10 seconds</strong> tick down with short square-wave pips (one per second, from 10 to 1). The 0-second instant itself is silent; the task-complete toast takes over. If a 15-min boundary coincides with completion, the chime is suppressed to avoid double-feedback.</p>
+                <p class="ja">2種類です。(1) <strong>15分ごと</strong>に優しい2音ベル（15 / 30 / 45 分）— 60分セッションなら3回のチェックポイント。(2) 最後の<strong>10秒</strong>は短いピッ音のカウントダウン（10→1 を毎秒1回）。0秒ジャストは無音で、完了トーストに譲ります。15分境界がタイマー終了と一致する場合、チャイムは省略されて重複を回避します。</p>
+            </details>
+
+            <details>
+                <summary class="en">Do the TIMER sounds work when my screen is off?</summary>
+                <summary class="ja">画面が消えていても TIMER 音は鳴りますか？</summary>
+                <p class="en">Foreground only. The chime/countdown are driven by <code>setInterval</code>, which iOS and Android throttle heavily (sometimes to once per minute) when the tab is backgrounded. The BGM still plays through the lock screen — but for crisp timer alerts, keep the DDD tab visible. Primary use: start a session, leave DDD frontmost on a second monitor or your phone propped up.</p>
+                <p class="ja">フォアグラウンドのみです。チャイムとカウントダウンは <code>setInterval</code> 駆動で、タブがバックグラウンドに行くと iOS・Android は大幅に間引きます（時には1分に1回まで）。BGM はロック画面越しでも鳴り続けますが、タイマーの音は DDD を前面に出しておくのがおすすめ。サブディスプレイやスマホ立て掛けなどで可視化しておく用途が基本です。</p>
+            </details>
+
+            <details>
+                <summary class="en">What are the icons that appear under LOG?</summary>
+                <summary class="ja">LOG下部に現れるアイコンは何？</summary>
+                <p class="en">A weekday pixel creature, layered with seasonal / time-of-day / milestone effects. MON flower → TUE tulip → WED sunflower → THU rose → FRI cat → SAT bird → SUN fish. On top: sakura (Mar-Apr), rain (Jun), fireflies (Jul-Aug nights), maple (Oct-Nov), snow (Dec-Feb), sunrise glow (Jan 1-3). Plus night sky (22-05h), dawn warmth (05-08h), streak sparks (≥7 days), streak glow (≥30 days), birthday confetti. See the <a href="#decor">LOG DECOR</a> section above for the full live catalog.</p>
+                <p class="ja">曜日のピクセルクリーチャーに、季節 / 時刻 / 記念日のレイヤーが重なっています。月:花 → 火:チューリップ → 水:向日葵 → 木:薔薇 → 金:猫 → 土:鳥 → 日:魚。その上に: 桜（3-4月）、雨（6月）、蛍（7-8月の夜）、紅葉（10-11月）、雪（12-2月）、初日の出（1/1-3）。さらに夜空（22-5時）、朝焼け（5-8時）、連続記録の火花（7日〜）、グロー（30日〜）、誕生日の紙吹雪も。上の <a href="#decor">LOG DECOR</a> セクションにフルカタログあり。</p>
+            </details>
+
+            <details>
+                <summary class="en">How is my streak counted, and how do I set my birthday?</summary>
+                <summary class="ja">連続記録はどう数える？誕生日はどう設定？</summary>
+                <p class="en">The streak is the longest unbroken chain of days where at least one task was completed, counting back from today. Miss a day and it resets. For the birthday confetti, type <code>birthday 12-25</code> (MM-DD) in the terminal — stored in <code>localStorage</code> only, never sent anywhere. Use <code>birthday off</code> to clear it.</p>
+                <p class="ja">連続記録は「今日からさかのぼって、1タスク以上完了した日が連続で続いた最長の日数」です。1日でも空けるとリセット。誕生日の紙吹雪は、ターミナルに <code>birthday 12-25</code>（MM-DD）と入力すれば設定完了 — <code>localStorage</code> のみに保存、外部送信は一切なし。解除は <code>birthday off</code>。</p>
+            </details>
         </div>
     </div>
 </section>
@@ -833,6 +1167,7 @@ footer.bottom a:hover { color: var(--glow); }
         <span>,ai  /  2026</span>
         <span class="en">DDD · Density · Daily · Design</span>
         <span class="ja">DDD · 密度 · 毎日 · 設計</span>
+        <a href="https://x.com/ddddotdotddd" target="_blank" rel="noopener">𝕏 @ddddotdotddd</a>
         <a href="./app.html"><span class="en">Open app →</span><span class="ja">アプリを開く →</span></a>
     </div>
 </footer>
@@ -906,6 +1241,80 @@ footer.bottom a:hover { color: var(--glow); }
             if (v) sp.classList.add('on');
             el.appendChild(sp);
         }
+    });
+})();
+
+// ── LOG decor catalog particle injection ───────────────────────────
+(function () {
+    function parts(id, cls, count, cb) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const baseImg = el.querySelector('.decor-base');
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = cls;
+            if (cb) cb(p, i);
+            if (baseImg) el.insertBefore(p, baseImg);
+            else el.appendChild(p);
+        }
+    }
+
+    parts('dg-sakura', 'ld-sakura', 14, (p) => {
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.animationDuration = (3.5 + Math.random() * 2.5) + 's';
+        p.style.animationDelay    = (-Math.random() * 5) + 's';
+    });
+    parts('dg-rain', 'ld-rain', 22, (p) => {
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.animationDuration = (0.5 + Math.random() * 0.4) + 's';
+        p.style.animationDelay    = (-Math.random() * 1) + 's';
+    });
+    parts('dg-firefly', 'ld-firefly', 9, (p) => {
+        p.style.left = (10 + Math.random() * 80) + '%';
+        p.style.top  = (15 + Math.random() * 55) + '%';
+        p.style.animationDuration = (1.6 + Math.random() * 2) + 's';
+        p.style.animationDelay    = (-Math.random() * 3) + 's';
+    });
+    const mapleCls = ['red', 'amber', 'gold'];
+    parts('dg-maple', 'ld-maple', 13, (p, i) => {
+        p.classList.add(mapleCls[i % 3]);
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.animationDuration = (4 + Math.random() * 2.5) + 's';
+        p.style.animationDelay    = (-Math.random() * 5) + 's';
+    });
+    parts('dg-snow', 'ld-snow', 18, (p) => {
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.animationDuration = (4.5 + Math.random() * 3) + 's';
+        p.style.animationDelay    = (-Math.random() * 6) + 's';
+    });
+    parts('dg-night', 'ld-star', 14, (p) => {
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.top  = (Math.random() * 55) + '%';
+        p.style.animationDuration = (2 + Math.random() * 3) + 's';
+        p.style.animationDelay    = (-Math.random() * 4) + 's';
+    });
+    parts('dg-streak7', 'ld-spark', 7, (p, i) => {
+        const a = (i / 7) * Math.PI * 2;
+        const d = 22 + Math.random() * 8;
+        p.style.setProperty('--dx', Math.cos(a) * d + 'px');
+        p.style.setProperty('--dy', Math.sin(a) * d + 'px');
+        p.style.animationDuration = (1 + Math.random() * 0.6) + 's';
+        p.style.animationDelay    = (-Math.random() * 2) + 's';
+    });
+    parts('dg-streak30', 'ld-spark', 12, (p, i) => {
+        const a = (i / 12) * Math.PI * 2;
+        const d = 32 + Math.random() * 10;
+        p.style.setProperty('--dx', Math.cos(a) * d + 'px');
+        p.style.setProperty('--dy', Math.sin(a) * d + 'px');
+        p.style.animationDuration = (1.2 + Math.random() * 0.8) + 's';
+        p.style.animationDelay    = (-Math.random() * 2) + 's';
+    });
+    parts('dg-birthday', 'ld-confetti', 18, (p, i) => {
+        p.classList.add('c' + ((i % 5) + 1));
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.setProperty('--dx', (Math.random() * 40 - 20) + 'px');
+        p.style.animationDuration = (2.5 + Math.random() * 1.5) + 's';
+        p.style.animationDelay    = (-Math.random() * 4) + 's';
     });
 })();
 </script>
